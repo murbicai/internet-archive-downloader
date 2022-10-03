@@ -15,6 +15,8 @@ os.chdir(loc)
 # defining functions
 
 # getting the size of the download
+
+
 def get_size_list(soup):
     """Creates a list of strings with download sizes"""
     return [j for i in soup.find_all('tr') for j in i.find_all('td')[2]]
@@ -34,7 +36,9 @@ def get_sizes(dls):
     return size
 
 # actually downloading the files
-def file_getter(url, link_list, slowdown=True):
+
+
+def file_getter(url, link_list, slowdown='y'):
     """
     Scrapes link of lists, downloading their contents.
     By default adds a short delay to prevent bans.
@@ -51,6 +55,7 @@ def file_getter(url, link_list, slowdown=True):
     if slowdown == 'y':
         sleep(1)
 
+
 def download_files(soup, url, slowdown):
     """Creates href list and then downloads files using file_getter"""
     # the code below works to get the link to a given game
@@ -61,7 +66,7 @@ def download_files(soup, url, slowdown):
         href_list.append({
             'link': game.find('a')['href'],
             'title': game.find('a').get_text()
-            })
+        })
 
     file_getter(url, href_list, slowdown)
 
@@ -77,7 +82,8 @@ print(
 proceed = input('Would you like to proceed? (y/n) ')
 
 if proceed == 'y':
-    slowdown = input('Do you want to download slowly in order to prevent bans? (y/n) ')
+    slowdown = input(
+        'Do you want to download slowly in order to prevent bans? (y/n) ')
     download_files(soup, url, slowdown)
 else:
     print('abobobo')
