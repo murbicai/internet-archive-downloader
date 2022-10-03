@@ -1,14 +1,17 @@
 # a program allowing us to download from archive.org repos
-# TODO: implement a way to point to the program to a given path with os module
 # TODO: implement a keyword search
 # TODO: refactor get_sizes to use regex grouping instead of slices
 
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
+import os
 
-# r'https://archive.org/download/nointro.md'
+# example link: r'https://archive.org/download/nointro.md'
 url = input("What is the website URL? (must be an archive.org link)\n")
+loc = input("Where would you like to download the files?\n")
+os.chdir(loc)
+
 # defining functions
 
 # getting the size of the download
@@ -41,14 +44,14 @@ def file_getter(url, link_list, slowdown=True):
 
     for i in link_list:
         response = requests.get(f'{url}{i["link"]}')
-        with open(f'{i["title"]}.7z', 'wb') as f:
+        print(f'Downloading {i["title"]}...')
+        with open(f'{i["title"]}', 'wb') as f:
             f.write(response.content)
 
-    if slowdown:
+    if slowdown == 'y':
         sleep(1)
 
-
-def download_files(soup, url):
+def download_files(soup, url, slowdown):
     """Creates href list and then downloads files using file_getter"""
     # the code below works to get the link to a given game
     # soup.find_all('tr')[1].find('a').get('href')
@@ -60,7 +63,7 @@ def download_files(soup, url):
             'title': game.find('a').get_text()
             })
 
-    file_getter(url, href_list)
+    file_getter(url, href_list, slowdown)
 
 
 response = requests.get(url)
@@ -74,6 +77,7 @@ print(
 proceed = input('Would you like to proceed? (y/n) ')
 
 if proceed == 'y':
-    download_files(soup, url)
+    slowdown = input('Do you want to download slowly in order to prevent bans? (y/n) ')
+    download_files(soup, url, slowdown)
 else:
     print('abobobo')
