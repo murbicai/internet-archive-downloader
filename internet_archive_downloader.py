@@ -1,6 +1,7 @@
 # a program allowing us to download from archive.org repos
 # TODO: refactor such that keyword search re-evaluates dl size and presents
 # it to the user
+# TODO: implement more modular search, including negative searches
 # TODO: refactor get_sizes to use regex grouping instead of slices (maybe)
 
 import requests
