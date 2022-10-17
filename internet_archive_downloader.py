@@ -1,7 +1,8 @@
 # a program allowing us to download from archive.org repos
 # TODO: refactor such that keyword search re-evaluates dl size and presents
 # it to the user
-# TODO: implement more modular search, including negative searches
+# TODO: implement more modular search, including negative searches, multiple
+# separate search terms
 # TODO: refactor get_sizes to use regex grouping instead of slices (maybe)
 
 import requests
@@ -11,7 +12,7 @@ from os import chdir
 
 # example link: r'https://archive.org/download/nointro.md'
 url = input(
-    "What is the website URL? (must be an archive.org link with .md extension)\n")
+    "What is the website URL?\n\nNOTE: Must be an archive.org link with .md extension!\n")
 loc = input("Where would you like to download the files?\n")
 chdir(loc)
 
