@@ -1,9 +1,20 @@
 # a program allowing us to download from archive.org repos
+# TODO: fix downloads for pages without file sizes
 # TODO: refactor such that keyword search re-evaluates dl size and presents
-# it to the user
+#       it to the user
 # TODO: implement more modular search, including negative searches, multiple
-# separate search terms
+#       separate search terms
 # TODO: refactor get_sizes to use regex grouping instead of slices (maybe)
+# TODO: incorporate some way for the program to filter out results in a 
+#       "smart" way. For example, it should be able to pick the latest
+#       non-beta USA version of a given release by default
+# 
+#       I think the simplest way to implement this would be via regex - the 
+#       titles are formatted such that the nation is always the first parens, 
+#       and further parens might indicate the version of the game. We could 
+#       default to downloading only USA
+# TODO: incorporate integration with metacritic page; select a range from 
+#       1-100, and the program will download the 
 
 import requests
 from bs4 import BeautifulSoup
